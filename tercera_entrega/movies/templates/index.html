@@ -15,6 +15,7 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href={% static "css/styles.css"%} rel="stylesheet" />
+        <!--I know that inline styling are bad practices, but the CSS file has over 10K lines of code and i couldn't make work the overwritten commands, so it was either what you see below or make a CSS from scratch which i don't have confidence to do it :( -->
         <style>
             #myNav
             {
@@ -53,14 +54,14 @@
                 <a class="navbar-brand" href= {% url "movies:homepage" %}>Home</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "movies:addMovies" %}>Add a Movie</a></li>
                         <li class="nav-item"><a class="nav-link" href={% url "movies:aboutMe" %}>About me</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- Header - set the background image for the header in the line below-->
+        <!-- Header -->
         <header id="container">
             <img src="https://www.shutterstock.com/shutterstock/photos/1905134458/display_1500/stock-photo-film-frame-photo-strip-high-resolution-blank-filter-mm-scan-template-texture-effect-trendy-1905134458.jpg" alt="Photo of some frames from a film stock" id="responsivePhoto" class="responsivePhoto" width="1600" height="400">
             <div id="center" class="text-center my-5">
@@ -82,17 +83,16 @@
                             {% endblock main_title %}
                         </h2>
                         {% block paragraph1 %}
-                        <p class="lead">Don't know what to see? Midly bored and can't decide for a movie to watch?<br></p>
+                        <p class="lead">Don't know what to see? Midly bored and can't decide what movie to watch?<br></p>
                         {% endblock paragraph1 %}
                         {% block paragraph2 %}
-                        <p id="hidden" class="mb-0">Let us recommend you something so you can see it!<br></p>
+                        <p class="mb-0">Let us recommend you something so you can see it! Check our movie database in <a href= {% url "movies:listMovies" %}>"List of Movies"!!</a>
+                        </p>
                         {% endblock paragraph2 %}
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Image element - set the background image for the header in the line below-->
-        <!-- Content section-->
         <!-- Footer-->
         <footer id="myFooter" class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p></div>

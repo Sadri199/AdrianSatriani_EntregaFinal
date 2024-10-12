@@ -6,13 +6,12 @@ from movies.forms import AddingMovie, SearchMovie
 
 def testing(request):
     test = f"This is a test, nothing to see here."
-    
     return HttpResponse(test)
 
-def homepage(request):
+def homepage(request): #Main page.
     return render(request, 'index.html')
 
-def listMovies(request):
+def listMovies(request): #A way for users to check the Database.
     
     searching = SearchMovie(request.GET)
     if searching.is_valid():
@@ -22,7 +21,7 @@ def listMovies(request):
         movies = MoviesDB.objects.all() #all the movies
     return render(request, "listMovies.html", {"movies": movies, "form":searching})
 
-def addMovies (request):
+def addMovies (request): #A way for users to add Movies to the Database.
     
     if request.method == "POST":
         addForm = AddingMovie(request.POST)
@@ -33,7 +32,7 @@ def addMovies (request):
             newMovie.save()
             return redirect("movies:addMovies")
     else:
-        addForm = AddingMovie() #Empty form
+        addForm = AddingMovie() #Empty form so we you re-enter you can fill the form again.
         
     return render (request, 'addMovies.html', {"form": addForm})
     

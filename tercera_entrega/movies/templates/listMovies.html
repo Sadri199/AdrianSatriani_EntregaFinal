@@ -9,7 +9,7 @@ Movie Searcher
 {% endblock main_header %}
 
 {% block main_title %}
-This is our Catalog
+This is our entire Catalog
 {% endblock main_title %}
 
 {% block paragraph1 %}
@@ -17,7 +17,7 @@ This is our Catalog
 <p>Want to search for something specific? Go ahead: <br></p>
 
 <form action="{% url "movies:listMovies" %}">
-    {{form}}
+    {{form.as_p}}
     <input type="submit", value="Search">
 </form>
 

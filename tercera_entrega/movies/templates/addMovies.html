@@ -5,7 +5,7 @@ Adding Movie
 {% endblock title %}
 
 {% block main_header %}
-Here you can add a new Movie!
+Add a Movie!
 {% endblock main_header %}
 
 {% block main_title %}
@@ -13,10 +13,10 @@ On this page you can add movies to our catalog.
 {% endblock main_title %}
 
 {% block paragraph1 %}
-Enter the required information down below:
+Enter the required information down below: <br><br>
 
 <form action="" method="POST">{% csrf_token %}
-    {{form.as_table}}
+    {{form.as_p}}
     <input type="submit", value="Send!">
 </form>
 {% endblock paragraph1 %}

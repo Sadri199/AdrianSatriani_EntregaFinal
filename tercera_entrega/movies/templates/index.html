@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>
+            {% block title %}
+            Homepage
+            {% endblock title %}
+        </title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href={% static "css/styles.css"%} rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href= {% url "movies:homepage" %}>Home</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="!#">Add a Movie</a></li> <!--Can't add link until the form is done correctly-->
+                        <li class="nav-item"><a class="nav-link" href="#!">About me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header - set the background image for the header in the line below-->
+        <header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
+            <div class="text-center my-5">
+                <h1>
+                    {% block main_header %}
+                    Welcome to What2Watch
+                    {% endblock main_header %}
+                </h1>
+            </div>
+        </header>
+        <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>
+                            {% block main_title %}
+                            Your new favorite website!
+                            {% endblock main_title %}
+                        </h2>
+                        {% block paragraph1 %}
+                        <p class="lead">Don't know what to see? Midly bored and can't decide for a movie to watch?</p>
+                        {% endblock paragraph1 %}
+                        {% block paragraph2 %}
+                        <p class="mb-0">Let us recommend you something so you can see it!</p>
+                        {% endblock paragraph2 %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Image element - set the background image for the header in the line below-->
+        <div class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/4ulffa6qoKA/1200x800')">
+            <!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
+            <div style="height: 20rem"></div>
+        </div>
+        <!-- Content section-->
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p></div>
+            <div>
+                <a class="nav-link active" aria-current="page" href= {% url "movies:testing" %}>Secret zone</a>
+            </div>
+        </footer>
+    </body>
+</html>

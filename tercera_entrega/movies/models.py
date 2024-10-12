@@ -4,8 +4,11 @@ from django.db import models
 class MoviesDB (models.Model):
     name = models.CharField(max_length=50)
     plot = models.CharField(max_length=50)
-    mainActor = models.CharField(max_length=20)
+    main_actor = models.CharField(max_length=20)
     year = models.IntegerField()
     
     def __str__(self):
-        return f"Movie: {self.name} Plot: {self.plot} Year of Release: {self.year}"    
+        return f"""Movie: {self.name} \n
+Plot: {self.plot} \n
+Main Actor: {self.main_actor} \n
+Year of Release: {self.year}\n"""    

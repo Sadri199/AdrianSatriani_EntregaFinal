@@ -10830,3 +10830,16 @@ textarea.form-control-lg {
   background-position: center;
   background-size: cover;
 }
+
+.responsivePhoto{
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden{
+  color: white;
+}

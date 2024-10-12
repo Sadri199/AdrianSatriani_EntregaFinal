@@ -14,4 +14,13 @@ On this page you can add movies to our catalog.
 
 {% block paragraph1 %}
 Enter the required information down below:
+
+<form action="" method="POST">{% csrf_token %}
+    {{form.as_table}}
+    <input type="submit", value="Send!">
+</form>
 {% endblock paragraph1 %}
+
+{% block paragraph2 %}
+Thank you for adding something to our Database, let's make it bigger!
+{% endblock paragraph2 %}

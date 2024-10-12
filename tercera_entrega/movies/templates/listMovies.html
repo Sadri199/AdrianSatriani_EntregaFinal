@@ -5,13 +5,38 @@ Listing Movies
 {% endblock title %}
 
 {% block main_header %}
-List of Movies
+Movie Searcher
 {% endblock main_header %}
 
 {% block main_title %}
-Our Catalog
+This is our Catalog
 {% endblock main_title %}
 
 {% block paragraph1 %}
-Here you can see all the Movies we currently have on our Database!
+<br>
+<p>Want to search for something specific? Go ahead: <br></p>
+
+<form action="{% url "movies:listMovies" %}">
+    {{form}}
+    <input type="submit", value="Search">
+</form>
+
+<br>
+Here you can see all the Movies we currently have on our Database:<br>
+<br> <!--For some reason it requires both br to make the indentation-->
+
+{% if movies %}
+<ul>
+    {% for movie in movies %}
+    <li>{{movie}}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No movies with that name were found in our Database (┬┬﹏┬┬)</p>
+{% endif %}
+
 {% endblock paragraph1 %}
+
+{% block paragraph2 %}
+Did you find something interesting? if not, <a href={% url "movies:addMovies" %}>try adding a new movie!</a>
+{% endblock paragraph2 %}

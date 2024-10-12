@@ -5,7 +5,7 @@ Acá vas a encontrar toda la información sobre el proyecto.
 ## Instalación
 
 - Podes hacer un git clone o descargar el .zip con el proyecto.
-- Luego vas a precisar instalar Python, lo podes descargar desde acá.
+- Luego vas a precisar instalar Python, lo podes descargar desde "https://www.python.org/downloads/" .
 - Una vez que lo tengas instalado vas a precisar instalar el modulo de Django, esto lo podes hacer en la terminal con el comando pip install Django.
 
 ## Ejecución

@@ -55,7 +55,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
+                        {% if  request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "movies:addMovies" %}>Add a Movie</a></li>
+                        <a href="#">{{request.user.username}}</a>
+                        <form action={% url "users:logout" %} method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Log Out">
+                        </form>
+                        {% else %}
+                        <a class="btn btn-light" href={% url "users:register" %}>Sign Up!</a>
+                        <a class="btn btn-dark" href={% url "users:login" %}>Log In</a>
+                        {% endif %}
                         <li class="nav-item"><a class="nav-link" href={% url "movies:aboutMe" %}>About me</a></li>
                     </ul>
                 </div>
@@ -102,9 +112,11 @@
                 </p>
             <p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p>
             </div>
+            {% if request.user.is_authenticated %}
             <div>
                 <a id="secret" class="nav-link active" aria-current="page" href= {% url "movies:testing" %}>Secret zone</a>
             </div>
+            {% endif %}
         </footer>
     </body>
 </html>

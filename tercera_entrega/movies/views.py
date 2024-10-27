@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Template, Context, loader
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from movies.models import MoviesDB
 from movies.forms import AddingMovie, SearchMovie, EditMovie
 
@@ -22,6 +23,7 @@ def viewingMovie(request, id): #Read working
     movie = MoviesDB.objects.get(id=id)
     return render (request, "movies/viewMovie.html", {"movie": movie})
 
+@login_required
 def editingMovie(request, id): #Working, needs decorators
     movie = MoviesDB.objects.get(id=id)
     
@@ -40,14 +42,14 @@ def editingMovie(request, id): #Working, needs decorators
         
     return render (request, "movies/editingMovie.html", {"movie": movie, "form": survey})
 
+@login_required
 def deleteMovie (request, id): #Working, needs decorators
     movie = MoviesDB.objects.get(id=id)
     movie.delete()
-    messages.success(request, "Movie deleted correctly.")
     return redirect ("movies:listMovies")
 
+@login_required
 def addMovies (request): #Working, needs decorators
-    messages.error (request, "Error!")
     
     if request.method == "POST":
         addForm = AddingMovie(request.POST)
@@ -64,6 +66,7 @@ def addMovies (request): #Working, needs decorators
 def aboutMe (request): #Working.
     return render(request, "movies/aboutMe.html")   
 
+@login_required
 def testing(request): #Working, needs decorators
     test = f"This is a test, nothing to see here."
     return HttpResponse(test) 

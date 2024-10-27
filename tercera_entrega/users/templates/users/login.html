@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block main_header %}
+Logging in
+{% endblock main_header %}
+
+{% block main_title %}
+Here you can log into your account!
+{% endblock main_title %}
+
+{% block paragraph1 %}
+
+<form action={% url "users:login" %} method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Login!">
+</form>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+<br>
+If you dont have an account, <a href={% url "users:register" %}>Sign Up!</a>
+{% endblock paragraph2 %}

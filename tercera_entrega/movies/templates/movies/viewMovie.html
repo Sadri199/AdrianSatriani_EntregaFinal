@@ -23,5 +23,7 @@ Specific Movie
 {% endblock paragraph1 %}
 
 {% block paragraph2 %}
+{% if request.user.is_authenticated %}
 Did you find an Error? Feel free to update this information through <a href={% url "movies:editingMovie" movie.id %}> here.</a>
+{% endif %}
 {% endblock paragraph2 %}

@@ -1,5 +1,5 @@
-una path para cada app con su correspondiente include ("app1.urls")
+una path para cada app con su correspondiente include ("app1.urls").
 
-vistas basadas en clases, tal vez cambiar la app original a este formato o crear una app nueva con este formato
+vistas basadas en clases, crear una app nueva con este formato.
 
-implementar crud correctamente
+Decoradores para CRUD, solamente usuarios activos deben verlo.

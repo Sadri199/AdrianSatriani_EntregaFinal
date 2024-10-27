@@ -12,7 +12,7 @@
             {% endblock title %}
         </title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href={% static "/assets/favicon.ico" %} />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href={% static "css/styles.css"%} rel="stylesheet" />
         <!--I know that inline styling are bad practices, but the CSS file has over 10K lines of code and i couldn't make work the overwritten commands, so it was either what you see below or make a CSS from scratch which i don't have confidence to do it :( -->
@@ -95,7 +95,13 @@
         </section>
         <!-- Footer-->
         <footer id="myFooter" class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p></div>
+            <div class="container text-center">
+                <p>
+                    <a class="text-center text-white" href="#"> My LinkedIn!</a>
+                    <a class="text-center text-white" href="#"> My Github!</a>
+                </p>
+            <p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p>
+            </div>
             <div>
                 <a id="secret" class="nav-link active" aria-current="page" href= {% url "movies:testing" %}>Secret zone</a>
             </div>

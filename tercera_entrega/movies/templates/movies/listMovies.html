@@ -28,7 +28,10 @@ Here you can see all the Movies we currently have on our Database:<br>
 {% if movies %}
 <ul>
     {% for movie in movies %}
-    <li>{{movie}}</li>
+    <li><a href={% url "movies:viewingMovie" movie.id%}>{{movie}}</a>
+        | <a href={% url "movies:editingMovie" movie.id %}>Edit!</a>
+        | <a href={% url "movies:deleteMovie" movie.id %}>Delete!</a>
+    </li>
     {% endfor %}
 </ul>
 {% else %}

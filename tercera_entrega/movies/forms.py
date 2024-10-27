@@ -10,3 +10,6 @@ class AddingMovie (forms.Form): #I wanted to make a dropdown with a Genre value 
 class SearchMovie (forms.Form):
     
     name = forms.CharField(max_length=50, required=False)
+    
+class EditMovie (AddingMovie): #Empty class, just so it looks better on the code itself.
+    ...    

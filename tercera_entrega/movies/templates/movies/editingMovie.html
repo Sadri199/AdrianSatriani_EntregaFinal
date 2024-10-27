@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block title %}
+Edit Movie
+{% endblock title %}
+
+{% block main_header %}
+Editing: {{movie.name}}
+{% endblock main_header %}
+
+{% block main_title %}
+{% endblock main_title %}
+
+{% block paragraph1 %}
+<h3>Please enter the new information regarding this title:</h3><br>
+
+<form action={% url "movies:editingMovie" movie.id %} method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Edit!">
+</form>
+<br>
+<a href={% url "movies:deleteMovie" movie.id%}>If this information should be erased, click here!</a>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+{% endblock paragraph2 %}

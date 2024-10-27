@@ -20,7 +20,8 @@ Enter the required information down below: <br><br>
     <input type="submit", value="Send!">
 </form>
 {% endblock paragraph1 %}
-
 {% block paragraph2 %}
-Thank you for adding something to our Database, let's make it bigger!
+<br>
+Thank you for adding something to our Database, let's make it bigger! <br>
+<a href={% url "movies:listMovies" %}>Click here to see the movies we currently have in our Database</a>
 {% endblock paragraph2 %}

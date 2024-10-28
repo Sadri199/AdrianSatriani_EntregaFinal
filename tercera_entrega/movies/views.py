@@ -6,10 +6,10 @@ from django.contrib.auth.decorators import login_required
 from movies.models import MoviesDB
 from movies.forms import AddingMovie, SearchMovie, EditMovie
 
-def homepage(request): #Main page.
+def homepage(request): #Working
     return render(request, 'index.html')
 
-def listMovies(request): #A way for users to check the Database.
+def listMovies(request): #Working
     
     searching = SearchMovie(request.GET)
     if searching.is_valid():
@@ -19,12 +19,12 @@ def listMovies(request): #A way for users to check the Database.
         movies = MoviesDB.objects.all() #all the movies
     return render(request, "movies/listMovies.html", {"movies": movies, "form":searching})
 
-def viewingMovie(request, id): #Read working
+def viewingMovie(request, id): #Working
     movie = MoviesDB.objects.get(id=id)
     return render (request, "movies/viewMovie.html", {"movie": movie})
 
 @login_required
-def editingMovie(request, id): #Working, needs decorators
+def editingMovie(request, id): #Working
     movie = MoviesDB.objects.get(id=id)
     
     survey = EditMovie(initial={"name": movie.name, "plot": movie.plot, "main_actor": movie.main_actor, "year": movie.year})
@@ -43,13 +43,13 @@ def editingMovie(request, id): #Working, needs decorators
     return render (request, "movies/editingMovie.html", {"movie": movie, "form": survey})
 
 @login_required
-def deleteMovie (request, id): #Working, needs decorators
+def deleteMovie (request, id): #Working
     movie = MoviesDB.objects.get(id=id)
     movie.delete()
     return redirect ("movies:listMovies")
 
 @login_required
-def addMovies (request): #Working, needs decorators
+def addMovies (request): #Working
     
     if request.method == "POST":
         addForm = AddingMovie(request.POST)
@@ -66,8 +66,6 @@ def addMovies (request): #Working, needs decorators
 def aboutMe (request): #Working.
     return render(request, "movies/aboutMe.html")   
 
-@login_required
-def testing(request): #Working, needs decorators
-    test = f"This is a test, nothing to see here."
-    return HttpResponse(test) 
+def testing(request): #Working
+    return render(request, 'movies/test.html')
     

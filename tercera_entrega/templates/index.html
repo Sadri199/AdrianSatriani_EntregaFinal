@@ -25,8 +25,10 @@
                 background-color: darkviolet !important;
             }
             #responsivePhoto {
+                min-width: 50%;
                 width: 100%;
-                height: 200;
+                min-height: 50%;
+                height: auto;
                 opacity: 0.2
             }
             #container{
@@ -45,6 +47,39 @@
             #hidden{
                 color: white;
             }
+            #dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+            #dropdown {
+            position: relative;
+            display: inline-block;
+            }
+            #dropdown-content {
+            display: none;
+            border-style: outset;
+            border-color: #000000;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background-color: darkviolet;
+            min-width: 160px;
+            box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+            #dropdown-content a {
+            color: white;            
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            }
+            #dropdown-content a:hover {background-color: #000000;}
+            #dropdown:hover #dropdown-content {display: block;}
+            #dropdown:hover #dropbtn {background-color: #3e8e41;}
         </style>
     </head>
     <body>
@@ -57,7 +92,19 @@
                         <li class="nav-item"><a class="nav-link" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
                         {% if  request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href={% url "movies:addMovies" %}>Add a Movie</a></li>
-                        <a href="#">{{request.user.username}}</a>
+                        <div id="dropdown" >
+                            <button class="btn btn-dark">
+                                {% if  request.user.extras.profilePic%}
+                                <img src={{request.user.extras.profilePic.url}} alt="" height="30px"/>
+                                {% endif %}
+                                {{user.username}}
+                            </button>
+                            <div id="dropdown-content">
+                                <a href={% url "users:myProfile" %}>My Profile</a>
+                                <a href={% url "users:editProfile" %}>Edit Profile</a>
+                                <a href={% url "users:ChangePassword" %}>Change Password</a>
+                            </div>
+                        </div>
                         <form action={% url "users:logout" %} method="post">
                             {% csrf_token %}
                             <input type="submit" class="btn btn-danger" value="Log Out">
@@ -73,7 +120,7 @@
         </nav>
         <!-- Header -->
         <header id="container">
-            <img src="https://www.shutterstock.com/shutterstock/photos/1905134458/display_1500/stock-photo-film-frame-photo-strip-high-resolution-blank-filter-mm-scan-template-texture-effect-trendy-1905134458.jpg" alt="Photo of some frames from a film stock" id="responsivePhoto" class="responsivePhoto" width="1600" height="400">
+            <img src="https://wallpapers.com/images/featured-full/film-reel-png-wkzwgj0y9laly3vs.png" alt="Photo of a film stock" id="responsivePhoto">
             <div id="center" class="text-center my-5">
                 <h1>
                     {% block main_header %}
@@ -93,7 +140,7 @@
                             {% endblock main_title %}
                         </h2>
                         {% block paragraph1 %}
-                        <p class="lead">Don't know what to see? Midly bored and can't decide what movie to watch?<br></p>
+                        <p class="mb-0">Don't know what to see? Midly bored and can't decide what movie to watch?</p> <br><br>
                         {% endblock paragraph1 %}
                         {% block paragraph2 %}
                         <p class="mb-0">Let us recommend you something so you can see it! Check our movie database in <a href= {% url "movies:listMovies" %}>"List of Movies"!!</a>
@@ -107,10 +154,10 @@
         <footer id="myFooter" class="py-5 bg-dark">
             <div class="container text-center">
                 <p>
-                    <a class="text-center text-white" href="#"> My LinkedIn!</a>
-                    <a class="text-center text-white" href="#"> My Github!</a>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" alt="" height="20px"><a class="text-center text-white" href="https://www.linkedin.com/in/adrian-satriani-jardin-86351b142/"> My LinkedIn!</a>
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20px"><a class="text-center text-white" href="https://github.com/Sadri199"> My Github!</a>
                 </p>
-            <p class="m-0 text-center text-white">Copyright &copy; Tercera Entrega 2024</p>
+            <p class="m-0 text-center text-white">Copyright &copy; Entrega Final 2024</p>
             </div>
             {% if request.user.is_authenticated %}
             <div>

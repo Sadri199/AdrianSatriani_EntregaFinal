@@ -7,6 +7,8 @@ app_name = "users"
 urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", views.loginIn, name="login"), #Sadri - Sad1594.
-    #path("profile/", views.profile, name="profile"), #Me quedé acá
+    path("profile/", views.myProfile, name="myProfile"),
+    path("profile/edit", views.editProfile, name="editProfile"),
+    path("profile/password", views.ChangePassword.as_view(), name="ChangePassword"),
     path("logout/", LogoutView.as_view(template_name="users/logout.html"), name="logout"),
 ]

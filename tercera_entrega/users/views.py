@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
-from users.forms import UserCreate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
+from users.forms import UserCreate, UserEdit
 from users.models import Extras
 
 def register (request):
@@ -27,3 +30,34 @@ def loginIn (request):
             
             return redirect("movies:homepage")
     return render (request, "users/login.html", {"form": form})
+
+@login_required
+def myProfile (request):
+    extraInfo = request.user.extras
+    form = UserEdit(instance=request.user, initial={"profilePic":extraInfo.profilePic})
+    
+    return render (request, "users/myProfile.html", {"form": form})
+
+@login_required
+def editProfile (request):
+    extraInfo = request.user.extras
+    form = UserEdit(instance=request.user, initial={"profilePic":extraInfo.profilePic, "genre": "", "birth_date": extraInfo.birth_date})
+    
+    if request.method == "POST":
+        form = UserEdit(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            
+            new_pic = form.cleaned_data.get("profilePic")
+            extraInfo.profilePic = new_pic if new_pic else extraInfo.profilePic
+            extraInfo.birth_date = form.cleaned_data.get("birth_date")
+            extraInfo.genre = form.cleaned_data.get("genre")
+            extraInfo.save()
+            form.save()
+            
+            return redirect ("users:myProfile")
+        
+    return render(request, "users/editProfile.html", {"form": form})
+
+class ChangePassword (LoginRequiredMixin, PasswordChangeView):
+    template_name="users/ChangePassword.html"
+    success_url="users/myProfile.html"

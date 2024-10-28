@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+
+{% block title %}
+Edit Profile
+{% endblock title %}
+
+{% block main_header %}
+Editing Profile
+{% endblock main_header %}
+
+{% block main_title %}
+Here you can edit your information {{request.user.username}}!
+{% endblock main_title %}
+
+{% block paragraph1 %}
+<form action={% url "users:editProfile" %} method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form.as_p}}
+    
+    <input type="submit" value="Edit!">
+</form>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+<br>
+If you want to change your Password, <a href={% url "users:ChangePassword" %}>Go Here!</a>
+{% endblock paragraph2 %}

@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+
+{% block title %}
+Specific Movie
+{% endblock title %}
+
+{% block main_header %}
+{{movie.name}}
+{% endblock main_header %}
+
+{% block main_title %}
+{% endblock main_title %}
+
+{% block paragraph1 %}
+<h3>This is the current information we have about this title:</h3>
+<br><br>
+<ul>
+    <li>Name of the movie: {{movie.name}} </li>
+    <li>Plot of the movie: {{movie.plot}} </li>
+    <li>Main actor of the movie: {{movie.main_actor}} </li>
+    <li>Year of Release: {{movie.year}} </li>
+</ul>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+{% if request.user.is_authenticated %}
+Did you find an Error? Feel free to update this information through <a href={% url "movies:editingMovie" movie.id %}> here.</a>
+{% endif %}
+{% endblock paragraph2 %}

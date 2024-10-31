@@ -10843,3 +10843,10 @@ textarea.form-control-lg {
 .hidden{
   color: white;
 }
+
+.super-margin{
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important; 
+}
+

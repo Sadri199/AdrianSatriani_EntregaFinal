@@ -1,26 +1,24 @@
 {% extends "index.html" %}
 
 {% block title %}
-Adding Movie
+Erasing Movie
 {% endblock title %}
 
 {% block main_header %}
-Add a Movie!
+Erase Movie "{{object.name}}"?
 {% endblock main_header %}
 
 {% block main_title %}
-On this page you can add movies to our catalog.
+Caution!<br><br>
+You are about to erase a movie from this Database: <br><br>
 {% endblock main_title %}
 
 {% block paragraph1 %}
-Enter the required information down below: <br><br>
-
 <form action="" method="POST">{% csrf_token %}
-    {{form.as_p}}
-    <input type="submit", value="Send!">
+    <p>You sure about this? If you are, click Erase!</p>
+    <input type="submit" onclick="return confirm('Are you sure?')" , value="Erase!">
 </form>
 {% endblock paragraph1 %}
-
 {% block paragraph2 %}
-Thank you for adding something to our Database, let's make it bigger!
+
 {% endblock paragraph2 %}

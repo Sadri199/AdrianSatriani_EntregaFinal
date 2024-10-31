@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+{% block title %}
+Register
+{% endblock title %}
+
+{% block main_header %}
+Register an Account
+{% endblock main_header %}
+
+{% block main_title %}
+Here you can make an account for our Webpage!
+{% endblock main_title %}
+
+{% block paragraph1 %}
+
+<form action={% url "users:register" %} method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Register!">
+</form>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+<br>
+If you have an account, <a href={% url "users:login" %}>Log In</a>
+{% endblock paragraph2 %}

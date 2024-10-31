@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>
+            {% block title %}
+            Homepage
+            {% endblock title %}
+        </title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={% static "/assets/favicon.ico" %} />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href={% static "css/styles.css"%} rel="stylesheet" />
+        <!--I know that inline styling are bad practices, but the CSS file has over 10K lines of code and i couldn't make work the overwritten commands, so it was either what you see below or make a CSS from scratch which i don't have confidence to do it :( -->
+        <style>
+            #myNav
+            {
+                background-color: darkviolet !important;
+            }
+            #myFooter {
+                background-color: darkviolet !important;
+            }
+            #responsivePhoto {
+                min-width: 50%;
+                width: 100%;
+                min-height: 50%;
+                height: auto;
+                opacity: 0.2
+            }
+            #container{
+                position:relative;
+                text-align: center;
+            }
+            #center{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            #secret {
+                color: darkviolet;
+            }
+            #hidden{
+                color: white;
+            }
+            #dropbtn {
+                background-color: #04AA6D;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+            #dropdown {
+            position: relative;
+            display: inline-block;
+            }
+            #dropdown-content {
+            display: none;
+            border-style: outset;
+            border-color: #000000;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background-color: darkviolet;
+            min-width: 160px;
+            box-shadow: 0px 16px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            }
+            #dropdown-content a {
+            color: white;            
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            }
+            #dropdown-content a:hover {background-color: #000000;}
+            #dropdown:hover #dropdown-content {display: block;}
+            #dropdown:hover #dropbtn {background-color: #3e8e41;}
+        </style>
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav id="myNav" class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href= {% url "movies:homepage" %}>Home</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
+                        {% if  request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href={% url "movies:CreateMovie" %}>Add a Movie</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "chat:chatPage" %}>Let's Chat!</a></li>
+                        <div id="dropdown" >
+                            <button class="btn btn-dark">
+                                {% if  request.user.extras.profilePic%}
+                                <img src={{request.user.extras.profilePic.url}} alt="" height="30px"/>
+                                {% endif %}
+                                {{user.username}}
+                            </button>
+                            <div id="dropdown-content">
+                                <a href={% url "users:myProfile" %}>My Profile</a>
+                                <a href={% url "users:editProfile" %}>Edit Profile</a>
+                                <a href={% url "users:ChangePassword" %}>Change Password</a>
+                            </div>
+                        </div>
+                        <form action={% url "users:logout" %} method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Log Out">
+                        </form>
+                        {% else %}
+                        <a class="btn btn-light" href={% url "users:register" %}>Sign Up!</a>
+                        <a class="btn btn-dark" href={% url "users:login" %}>Log In</a>
+                        {% endif %}
+                        <li class="nav-item"><a class="nav-link" href={% url "movies:aboutMe" %}>About me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header -->
+        <header id="container">
+            <img src={% static "/assets/img/filmreel.png" %} alt="Photo of a film stock" id="responsivePhoto">
+            <div id="center" class="text-center my-5">
+                <h1>
+                    {% block main_header %}
+                    Welcome to What2Watch!<br>
+                    {% endblock main_header %}
+                </h1>
+            </div>
+        </header>
+        <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>
+                            {% block main_title %}
+                            Your new favorite website!<br><br>
+                            {% endblock main_title %}
+                        </h2>
+                        {% block paragraph1 %}
+                        <p class="mb-0 lead">Don't know what to see? Midly bored and can't decide what movie to watch?</p> <br><br>
+                        {% endblock paragraph1 %}
+                        {% block paragraph2 %}
+                        <p class="mb-0 lead">Let us recommend you something so you can see it! Check our movie database in <a href= {% url "movies:listMovies" %}>"List of Movies"!!</a>
+                        </p>
+                        {% endblock paragraph2 %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer id="myFooter" class="py-5 bg-dark">
+            <div class="container text-center">
+                <p>
+                    <img src={% static "/assets/img/linkedin.png" %} alt="" height="20px"><a class="text-center text-white" href="https://www.linkedin.com/in/adrian-satriani-jardin-86351b142/"> My LinkedIn!</a>
+                    <img src={% static "/assets/img/github.png" %} alt="" height="20px"><a class="text-center text-white" href="https://github.com/Sadri199"> My Github!</a>
+                </p>
+            <p class="m-0 text-center text-white">Copyright &copy; Entrega Final 2024</p>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div>
+                <a id="secret" class="nav-link active" aria-current="page" href= {% url "movies:testing" %}>Secret zone</a>
+            </div>
+            {% endif %}
+        </footer>
+    </body>
+</html>

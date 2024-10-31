@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block title %}
+My Profile
+{% endblock title %}
+
+{% block main_header %}
+My Profile
+{% endblock main_header %}
+
+{% block main_title %}
+Here is all your information {{request.user.username}}!
+{% endblock main_title %}
+
+{% block paragraph1 %}
+
+<ul>
+    <li>Your Username: {{user.username}}</li>
+    <li>Your Email: {{user.email}}</li>
+    <li>Your Name: {{user.first_name}} {{user.last_name}}</li>
+    <li>Your Birthday: {{user.extras.birth_date}}</li>
+    <li>Your Genre: {{user.extras.genre}}</li>
+    {% if  request.user.extras.profilePic%}
+    <li>This is your Profile Picture: <img src={{user.extras.profilePic.url}} alt=""></li>
+    {% endif %}
+</ul>
+<br>
+Something wrong or missing? Feel free to <a href={% url "users:editProfile" %}>Edit your information!</a>
+<br>
+Want to change your password? Change it <a href={% url "users:ChangePassword" %}>Here!</a>
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+
+{% endblock paragraph2 %}

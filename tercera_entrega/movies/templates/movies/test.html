@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+
+{% block title %}
+Test
+{% endblock title %}
+
+{% block main_header %}
+Test
+{% endblock main_header %}
+
+{% block main_title %}
+Welcome, to the Secret Zone:
+{% endblock main_title %}
+
+{% block paragraph1 %}
+{% if request.user.is_authenticated %}
+<h3></h3>
+<img src="https://preview.redd.it/absolute-cinema-cat-gives-50-joy-when-watching-any-movie-v0-4lxtou1mpcld1.jpeg?width=640&crop=smart&auto=webp&s=0f45737073ea9ea1fde60df77188ea5ba7bca217" alt="">
+
+wow <br>
+{% endif %}
+
+{% if request.user.is_authenticated != True %}
+If you haven't logged in, you only see me {:c}
+{% endif %}
+{% endblock paragraph1 %}
+
+{% block paragraph2 %}
+
+{% endblock paragraph2 %}

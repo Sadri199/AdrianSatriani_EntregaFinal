@@ -2,7 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Template, Context, loader
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from movies.models import MoviesDB
 from movies.forms import AddingMovie, SearchMovie, EditMovie
 
@@ -42,26 +46,38 @@ def editingMovie(request, id): #Working
         
     return render (request, "movies/editingMovie.html", {"movie": movie, "form": survey})
 
-@login_required
-def deleteMovie (request, id): #Working
-    movie = MoviesDB.objects.get(id=id)
-    movie.delete()
-    return redirect ("movies:listMovies")
+# @login_required
+# def deleteMovie (request, id): #Working, Normal View version
+#     movie = MoviesDB.objects.get(id=id)
+#     movie.delete()
+#     return redirect ("movies:listMovies")
 
-@login_required
-def addMovies (request): #Working
+class EraseMovie(LoginRequiredMixin,DeleteView): #Working, Class Based View version
+    model = MoviesDB
+    template_name = "movies/eraseMovies.html"
+    success_url = reverse_lazy("movies:listMovies")
+
+# @login_required
+# def addMovies (request): #Working, this will have 2 different versions, Normal View and View based on Class
     
-    if request.method == "POST":
-        addForm = AddingMovie(request.POST)
+#     if request.method == "POST":
+#         addForm = AddingMovie(request.POST)
         
-        if addForm.is_valid():
-            addData = addForm.cleaned_data
-            newMovie = MoviesDB.objects.get_or_create(name=addData["name"], plot=addData["plot"], main_actor=addData["main_actor"], year=addData["year"]) ##As a note, i managed to make "name" a unique field, the downside is that it crashes with a 500, i tried my best to make a pop up appear telling the user that that specific name already exists in the DB but i couldn't make it work.
-            return redirect("movies:addMovies")
-    else:
-        addForm = AddingMovie() #Empty form so we you re-enter you can fill the form again.
+#         if addForm.is_valid():
+#             addData = addForm.cleaned_data
+#             newMovie = MoviesDB.objects.get_or_create(name=addData["name"], plot=addData["plot"], main_actor=addData["main_actor"], year=addData["year"])
+#             return redirect("movies:addMovies")
+#     else:
+#         addForm = AddingMovie() #Empty form so we you re-enter you can fill the form again.
         
-    return render (request, 'movies/addMovies.html', {"form": addForm})
+#     return render (request, 'movies/addMovies.html', {"form": addForm})
+
+class CreateMovie(LoginRequiredMixin,SuccessMessageMixin,CreateView): #Working, both version work, i'll leave this one functioning, but in order to use the first one you must edit "movies.url" and the HTMLs "index", "editingMovies" and "listMovies".
+    model = MoviesDB
+    template_name = "movies/addMovies.html"
+    fields = ["name", "plot", "main_actor", "year"]
+    success_url = reverse_lazy("movies:CreateMovie")
+    success_message = "Movie added to our Database!"
     
 def aboutMe (request): #Working.
     return render(request, "movies/aboutMe.html")   

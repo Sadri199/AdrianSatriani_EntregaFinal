@@ -91,7 +91,8 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href= {% url "movies:listMovies" %}>List of Movies</a></li>
                         {% if  request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href={% url "movies:addMovies" %}>Add a Movie</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "movies:CreateMovie" %}>Add a Movie</a></li>
+                        <li class="nav-item"><a class="nav-link" href={% url "chat:chatPage" %}>Let's Chat!</a></li>
                         <div id="dropdown" >
                             <button class="btn btn-dark">
                                 {% if  request.user.extras.profilePic%}
@@ -120,7 +121,7 @@
         </nav>
         <!-- Header -->
         <header id="container">
-            <img src="https://wallpapers.com/images/featured-full/film-reel-png-wkzwgj0y9laly3vs.png" alt="Photo of a film stock" id="responsivePhoto">
+            <img src={% static "/assets/img/filmreel.png" %} alt="Photo of a film stock" id="responsivePhoto">
             <div id="center" class="text-center my-5">
                 <h1>
                     {% block main_header %}
@@ -136,14 +137,14 @@
                     <div class="col-lg-6">
                         <h2>
                             {% block main_title %}
-                            Your new favorite website!<br>
+                            Your new favorite website!<br><br>
                             {% endblock main_title %}
                         </h2>
                         {% block paragraph1 %}
-                        <p class="mb-0">Don't know what to see? Midly bored and can't decide what movie to watch?</p> <br><br>
+                        <p class="mb-0 lead">Don't know what to see? Midly bored and can't decide what movie to watch?</p> <br><br>
                         {% endblock paragraph1 %}
                         {% block paragraph2 %}
-                        <p class="mb-0">Let us recommend you something so you can see it! Check our movie database in <a href= {% url "movies:listMovies" %}>"List of Movies"!!</a>
+                        <p class="mb-0 lead">Let us recommend you something so you can see it! Check our movie database in <a href= {% url "movies:listMovies" %}>"List of Movies"!!</a>
                         </p>
                         {% endblock paragraph2 %}
                     </div>
@@ -154,8 +155,8 @@
         <footer id="myFooter" class="py-5 bg-dark">
             <div class="container text-center">
                 <p>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" alt="" height="20px"><a class="text-center text-white" href="https://www.linkedin.com/in/adrian-satriani-jardin-86351b142/"> My LinkedIn!</a>
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="" height="20px"><a class="text-center text-white" href="https://github.com/Sadri199"> My Github!</a>
+                    <img src={% static "/assets/img/linkedin.png" %} alt="" height="20px"><a class="text-center text-white" href="https://www.linkedin.com/in/adrian-satriani-jardin-86351b142/"> My LinkedIn!</a>
+                    <img src={% static "/assets/img/github.png" %} alt="" height="20px"><a class="text-center text-white" href="https://github.com/Sadri199"> My Github!</a>
                 </p>
             <p class="m-0 text-center text-white">Copyright &copy; Entrega Final 2024</p>
             </div>

@@ -1,5 +1,0 @@
-una path para cada app con su correspondiente include ("app1.urls").
-
-vistas basadas en clases, crear una app nueva con este formato.
-
-Decoradores para CRUD, solamente usuarios activos deben verlo.

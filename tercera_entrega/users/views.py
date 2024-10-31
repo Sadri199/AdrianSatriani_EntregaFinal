@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 from users.forms import UserCreate, UserEdit
 from users.models import Extras
 
@@ -41,7 +42,7 @@ def myProfile (request):
 @login_required
 def editProfile (request):
     extraInfo = request.user.extras
-    form = UserEdit(instance=request.user, initial={"profilePic":extraInfo.profilePic, "genre": "", "birth_date": extraInfo.birth_date})
+    form = UserEdit(instance=request.user, initial={"profilePic":extraInfo.profilePic, "genre": extraInfo.genre, "birth_date": extraInfo.birth_date})
     
     if request.method == "POST":
         form = UserEdit(request.POST, request.FILES, instance=request.user)
@@ -60,4 +61,4 @@ def editProfile (request):
 
 class ChangePassword (LoginRequiredMixin, PasswordChangeView):
     template_name="users/ChangePassword.html"
-    success_url="users/myProfile.html"
+    success_url=reverse_lazy("users:myProfile")

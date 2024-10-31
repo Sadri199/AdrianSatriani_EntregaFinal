@@ -283,9 +283,5 @@ pyrightconfig.json
 .ionide
 
 ##Random files##
-paso a paso.md
-remember_venv.txt
-reorden paso a paso.md
-.Ejemplo de entrega/*
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,django

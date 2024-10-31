@@ -11,7 +11,7 @@ urlpatterns = [
     path('movies/listmovies/', listMovies, name="listMovies"),
     path("movies/viewingMovie/<int:id>", viewingMovie, name="viewingMovie"),
     path("movies/editingMovie/<int:id>", editingMovie, name="editingMovie"),
-    path("movies/deleteMovie/<int:id>", deleteMovie, name="deleteMovie"), 
-    path("movies/addmovies/", addMovies, name="addMovies"),
+    path("movies/deleteMovie/<int:pk>", EraseMovie.as_view(), name="EraseMovie"), 
+    path("movies/addmovies/", CreateMovie.as_view(), name="CreateMovie"),
     path("aboutme/", aboutMe, name="aboutMe"),
 ]

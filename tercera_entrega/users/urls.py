@@ -6,7 +6,7 @@ app_name = "users"
 
 urlpatterns = [
     path("register/", views.register, name="register"),
-    path("login/", views.loginIn, name="login"), #Sadri - Sad1594.
+    path("login/", views.loginIn, name="login"), #Sadri -  Sad15977
     path("profile/", views.myProfile, name="myProfile"),
     path("profile/edit", views.editProfile, name="editProfile"),
     path("profile/password", views.ChangePassword.as_view(), name="ChangePassword"),

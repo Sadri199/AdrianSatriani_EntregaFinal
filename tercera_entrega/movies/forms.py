@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from .models import MoviesDB 
 
-class AddingMovie (forms.Form): #I wanted to make a dropdown with a Genre value but it was too hard and i prefer to leave it for the next project.
+class AddingMovie (forms.Form): 
     
     name = forms.CharField(max_length=50, min_length=5)
     plot = forms.CharField(max_length=100, min_length=5, required=False)

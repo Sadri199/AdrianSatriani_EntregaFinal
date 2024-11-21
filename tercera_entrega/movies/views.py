@@ -75,7 +75,7 @@ class EraseMovie(LoginRequiredMixin,DeleteView): #Working, Class Based View vers
 class CreateMovie(LoginRequiredMixin,SuccessMessageMixin,CreateView): #Working, both version work, i'll leave this one functioning, but in order to use the first one you must edit "movies.url" and the HTMLs "index", "editingMovies" and "listMovies".
     model = MoviesDB
     template_name = "movies/addMovies.html"
-    fields = ["name", "plot", "main_actor", "year"]
+    fields = ["name", "plot", "main_actor", "year", "moviePic"]
     success_url = reverse_lazy("movies:CreateMovie")
     success_message = "Movie added to our Database!"
     

@@ -15,6 +15,11 @@ Specific Movie
 <h3>This is the current information we have about this title:</h3>
 <br><br>
 <ul>
+    {% if  movie.moviePic%}
+    <li>
+        <img src={{movie.moviePic.url}} alt="" height="300px"/>
+    </li>    
+        {% endif %}
     <li>Name of the movie: {{movie.name}} </li>
     <li>Plot of the movie: {{movie.plot}} </li>
     <li>Main actor of the movie: {{movie.main_actor}} </li>

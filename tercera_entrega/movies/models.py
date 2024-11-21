@@ -8,6 +8,7 @@ class MoviesDB (models.Model): #Working with both Class Based Views and Normal V
     plot = models.CharField(max_length=100, default='2 guys go really slow in their sports cars.')
     main_actor = models.CharField(max_length=20, default="din viesel", validators=[RegexValidator(regex="^[a-zA-Z ]+$", message="Enter letters only.", code="invalid value")]) 
     year = models.IntegerField(default=1951, validators=[MinValueValidator(1950, message="Year cannot go before 1950!"), MaxValueValidator(2030, message="Year cannot go after 2030!")])
+    moviePic = models.ImageField(upload_to="moviepics", blank=True, null=True)
     
     def clean_year(self):
         year = self.cleaned_data["year"]
